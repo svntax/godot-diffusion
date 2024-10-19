@@ -27,3 +27,8 @@ And to set up CUDA for [PyTorch](https://pytorch.org/get-started/locally/), run 
 ```
 python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
 ```
+To set up the [Palettize](https://github.com/Astropulse/sd-palettize) tool, run the following:
+```
+python -m pip install git+https://www.github.com/hbldh/hitherdither
+python -m pip install opencv-python
+```

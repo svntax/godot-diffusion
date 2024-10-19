@@ -25,9 +25,9 @@ horizontal_alignment = 1
 [node name="PromptContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 63.0
+offset_top = 48.0
 offset_right = 489.0
-offset_bottom = 186.0
+offset_bottom = 171.0
 
 [node name="PositivePromptLabel" type="Label" parent="PromptContainer"]
 layout_mode = 2
@@ -43,9 +43,9 @@ wrap_mode = 1
 [node name="NegativePromptContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 192.0
+offset_top = 177.0
 offset_right = 485.0
-offset_bottom = 315.0
+offset_bottom = 300.0
 
 [node name="NegativePromptLabel" type="Label" parent="NegativePromptContainer"]
 layout_mode = 2
@@ -60,35 +60,35 @@ wrap_mode = 1
 [node name="ModelPathLabel" type="Label" parent="."]
 layout_mode = 1
 offset_left = 576.0
-offset_top = 63.0
+offset_top = 48.0
 offset_right = 707.0
-offset_bottom = 86.0
+offset_bottom = 71.0
 text = "Model path"
 
 [node name="ModelPath" type="LineEdit" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 offset_left = 576.0
-offset_top = 87.0
+offset_top = 72.0
 offset_right = 1088.0
-offset_bottom = 126.0
+offset_bottom = 111.0
 
 [node name="LoadModelButton" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 offset_left = 576.0
-offset_top = 135.0
+offset_top = 120.0
 offset_right = 704.0
-offset_bottom = 167.0
+offset_bottom = 152.0
 text = "Load Model"
 
 [node name="OpenOutputsButton" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 offset_left = 576.0
-offset_top = 584.0
+offset_top = 569.0
 offset_right = 680.0
-offset_bottom = 616.0
+offset_bottom = 601.0
 text = "Outputs"
 
 [node name="GenerateButton" type="Button" parent="."]
@@ -96,9 +96,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 offset_left = 992.0
-offset_top = 136.0
+offset_top = 121.0
 offset_right = 1088.0
-offset_bottom = 168.0
+offset_bottom = 153.0
 text = "Generate"
 
 [node name="Node" type="Node" parent="."]
@@ -118,9 +118,9 @@ script = ExtResource("2_4hx3m")
 [node name="ParametersContainer" type="GridContainer" parent="."]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 352.0
+offset_top = 313.0
 offset_right = 489.0
-offset_bottom = 598.0
+offset_bottom = 559.0
 
 [node name="WidthContainer" type="VBoxContainer" parent="ParametersContainer"]
 layout_mode = 2
@@ -178,26 +178,30 @@ max_value = 2048.0
 step = 64.0
 value = 512.0
 
-[node name="SamplingStepsContainer" type="VBoxContainer" parent="ParametersContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ParametersContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="SamplingStepsContainer" type="VBoxContainer" parent="ParametersContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Labels" type="HBoxContainer" parent="ParametersContainer/SamplingStepsContainer"]
+[node name="Labels" type="HBoxContainer" parent="ParametersContainer/HBoxContainer/SamplingStepsContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ParametersContainer/SamplingStepsContainer/Labels"]
+[node name="Label" type="Label" parent="ParametersContainer/HBoxContainer/SamplingStepsContainer/Labels"]
 layout_mode = 2
 text = "Steps
 "
 
-[node name="SamplingStepsLabel" type="Label" parent="ParametersContainer/SamplingStepsContainer/Labels"]
+[node name="SamplingStepsLabel" type="Label" parent="ParametersContainer/HBoxContainer/SamplingStepsContainer/Labels"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "20"
 horizontal_alignment = 2
 
-[node name="SamplingStepsSlider" type="HSlider" parent="ParametersContainer/SamplingStepsContainer"]
+[node name="SamplingStepsSlider" type="HSlider" parent="ParametersContainer/HBoxContainer/SamplingStepsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -206,26 +210,26 @@ min_value = 1.0
 max_value = 150.0
 value = 20.0
 
-[node name="CFGScaleContainer" type="VBoxContainer" parent="ParametersContainer"]
+[node name="CFGScaleContainer" type="VBoxContainer" parent="ParametersContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Labels" type="HBoxContainer" parent="ParametersContainer/CFGScaleContainer"]
+[node name="Labels" type="HBoxContainer" parent="ParametersContainer/HBoxContainer/CFGScaleContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ParametersContainer/CFGScaleContainer/Labels"]
+[node name="Label" type="Label" parent="ParametersContainer/HBoxContainer/CFGScaleContainer/Labels"]
 layout_mode = 2
 text = "CFG Scale
 "
 
-[node name="CFGScaleLabel" type="Label" parent="ParametersContainer/CFGScaleContainer/Labels"]
+[node name="CFGScaleLabel" type="Label" parent="ParametersContainer/HBoxContainer/CFGScaleContainer/Labels"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "7"
 horizontal_alignment = 2
 
-[node name="CFGScaleSlider" type="HSlider" parent="ParametersContainer/CFGScaleContainer"]
+[node name="CFGScaleSlider" type="HSlider" parent="ParametersContainer/HBoxContainer/CFGScaleContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -248,12 +252,19 @@ layout_mode = 2
 text = "0"
 max_length = 32
 
+[node name="PalettizeCheckBox" type="CheckBox" parent="ParametersContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Palettize"
+
 [node name="OutputsContainer" type="PanelContainer" parent="."]
 layout_mode = 2
 offset_left = 576.0
-offset_top = 184.0
+offset_top = 169.0
 offset_right = 1088.0
-offset_bottom = 564.0
+offset_bottom = 549.0
 
 [node name="GeneratedImage" type="TextureRect" parent="OutputsContainer"]
 unique_name_in_owner = true
@@ -305,7 +316,7 @@ stretch_mode = 3
 [connection signal="file_selected" from="Node/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="value_changed" from="ParametersContainer/WidthContainer/WidthSlider" to="." method="_on_width_slider_value_changed"]
 [connection signal="value_changed" from="ParametersContainer/HeightContainer/HeightSlider" to="." method="_on_height_slider_value_changed"]
-[connection signal="value_changed" from="ParametersContainer/SamplingStepsContainer/SamplingStepsSlider" to="." method="_on_sampling_steps_slider_value_changed"]
-[connection signal="value_changed" from="ParametersContainer/CFGScaleContainer/CFGScaleSlider" to="." method="_on_cfg_scale_slider_value_changed"]
+[connection signal="value_changed" from="ParametersContainer/HBoxContainer/SamplingStepsContainer/SamplingStepsSlider" to="." method="_on_sampling_steps_slider_value_changed"]
+[connection signal="value_changed" from="ParametersContainer/HBoxContainer/CFGScaleContainer/CFGScaleSlider" to="." method="_on_cfg_scale_slider_value_changed"]
 [connection signal="pressed" from="OutputsContainer/GeneratedImage/ViewImageButton" to="." method="_on_view_image_button_pressed"]
 [connection signal="pressed" from="FullViewContainer/PanelContainer/CloseFullViewButton" to="." method="_on_close_full_view_button_pressed"]

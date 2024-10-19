@@ -6,6 +6,7 @@ from py4godot.classes.LineEdit.LineEdit import LineEdit
 from py4godot.classes.TextEdit.TextEdit import TextEdit
 from py4godot.classes.Button.Button import Button
 from py4godot.classes.HSlider.HSlider import HSlider
+from py4godot.classes.Button.Button import Button
 from py4godot.classes.TextureRect.TextureRect import TextureRect
 from py4godot.classes.Image.Image import Image as GDImage
 from py4godot.classes.ImageTexture.ImageTexture import ImageTexture
@@ -18,6 +19,9 @@ import torch
 from PIL import Image
 import os.path
 import random, sys
+
+sys.path.append("/scripts")
+from scripts.palettize import run_palettize
 
 @gdclass
 class python_helper(Node):
@@ -52,13 +56,29 @@ class python_helper(Node):
 		pipe.to("cuda")
 		
 		generator = torch.Generator(device="cuda").manual_seed(seed)
-		image = pipe(prompt,
+		processed = pipe(prompt,
 			negative_prompt=self.negative_prompt.text,
 			width=self.width_slider.value,
 			height=self.height_slider.value,
 			num_inference_steps=self.sampling_steps_slider.value,
 			guidance_scale=self.cfg_scale_slider.value,
-			generator=generator).images[0]
+			generator=generator)
+		
+		if self.palettize_checkbox.button_pressed:
+			downscale = True
+			original = False
+			upscale = True
+			kcentroid = True
+			scale = 8
+			paletteDropdown = "None"
+			paletteURL = ""
+			palette = None
+			clusters = 24
+			dither = 0
+			ditherStrength = 0
+			processed = run_palettize(processed, downscale, original, upscale, kcentroid, scale, paletteDropdown, paletteURL, palette, clusters, dither, ditherStrength)
+		
+		image = processed.images[0]
 		
 		# Save to folder of generated images
 		image_path = self.save_image(image)
@@ -79,6 +99,7 @@ class python_helper(Node):
 		self.sampling_steps_slider = HSlider.cast(self.get_node(NodePath.new2("%SamplingStepsSlider")))
 		self.cfg_scale_slider = HSlider.cast(self.get_node(NodePath.new2("%CFGScaleSlider")))
 		self.seed_input = LineEdit.cast(self.get_node(NodePath.new2("%SeedInput")))
+		self.palettize_checkbox = Button.cast(self.get_node(NodePath.new2("%PalettizeCheckBox")))
 		self.generated_image = TextureRect.cast(self.get_node(NodePath.new2("%GeneratedImage")))
 		self.generated_image_full = TextureRect.cast(self.get_node(NodePath.new2("%GeneratedImageFull")))
 		
