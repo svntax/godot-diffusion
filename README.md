@@ -1,5 +1,5 @@
 # godot-diffusion
-Run Stable Diffusion directly within Godot.
+Run diffusion models directly within Godot.
 
 ## Setup
 This project is made with Godot 4.3 and uses the GDExtension plugin [py4godot](https://github.com/niklas2902/py4godot) for running Python.
