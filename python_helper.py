@@ -26,6 +26,22 @@ from scripts.palettize import run_palettize
 @gdclass
 class python_helper(Node):
 	
+	def _ready(self) -> None:
+		self.positive_prompt = TextEdit.cast(self.get_node(NodePath.new2("%PositivePrompt")))
+		self.negative_prompt = TextEdit.cast(self.get_node(NodePath.new2("%NegativePrompt")))
+		self.model_path_line = LineEdit.cast(self.get_node(NodePath.new2("%ModelPath")))
+		self.width_slider = HSlider.cast(self.get_node(NodePath.new2("%WidthSlider")))
+		self.height_slider = HSlider.cast(self.get_node(NodePath.new2("%HeightSlider")))
+		self.sampling_steps_slider = HSlider.cast(self.get_node(NodePath.new2("%SamplingStepsSlider")))
+		self.cfg_scale_slider = HSlider.cast(self.get_node(NodePath.new2("%CFGScaleSlider")))
+		self.seed_input = LineEdit.cast(self.get_node(NodePath.new2("%SeedInput")))
+		self.palettize_checkbox = Button.cast(self.get_node(NodePath.new2("%PalettizeCheckBox")))
+		self.generated_image = TextureRect.cast(self.get_node(NodePath.new2("%GeneratedImage")))
+		self.generated_image_full = TextureRect.cast(self.get_node(NodePath.new2("%GeneratedImageFull")))
+		
+		self.generate_button = Button.cast(self.get_node(NodePath.new2("%GenerateButton")))
+		self.generate_button.pressed.connect(self.generate_button_pressed)
+	
 	# Saves a PIL image to the outputs folder
 	def save_image(self, image):
 		os_instance = OS.get_instance()
@@ -89,22 +105,6 @@ class python_helper(Node):
 		texture = ImageTexture.create_from_image(loaded_image)
 		self.generated_image.texture = texture
 		self.generated_image_full.texture = texture
-
-	def _ready(self) -> None:
-		self.positive_prompt = TextEdit.cast(self.get_node(NodePath.new2("%PositivePrompt")))
-		self.negative_prompt = TextEdit.cast(self.get_node(NodePath.new2("%NegativePrompt")))
-		self.model_path_line = LineEdit.cast(self.get_node(NodePath.new2("%ModelPath")))
-		self.width_slider = HSlider.cast(self.get_node(NodePath.new2("%WidthSlider")))
-		self.height_slider = HSlider.cast(self.get_node(NodePath.new2("%HeightSlider")))
-		self.sampling_steps_slider = HSlider.cast(self.get_node(NodePath.new2("%SamplingStepsSlider")))
-		self.cfg_scale_slider = HSlider.cast(self.get_node(NodePath.new2("%CFGScaleSlider")))
-		self.seed_input = LineEdit.cast(self.get_node(NodePath.new2("%SeedInput")))
-		self.palettize_checkbox = Button.cast(self.get_node(NodePath.new2("%PalettizeCheckBox")))
-		self.generated_image = TextureRect.cast(self.get_node(NodePath.new2("%GeneratedImage")))
-		self.generated_image_full = TextureRect.cast(self.get_node(NodePath.new2("%GeneratedImageFull")))
-		
-		self.generate_button = Button.cast(self.get_node(NodePath.new2("%GenerateButton")))
-		self.generate_button.pressed.connect(self.generate_button_pressed)
 
 	def generate_button_pressed(self):
 		if not os.path.isfile(self.model_path_line.text):
