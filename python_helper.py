@@ -7,6 +7,7 @@ from py4godot.classes.TextEdit.TextEdit import TextEdit
 from py4godot.classes.Button.Button import Button
 from py4godot.classes.HSlider.HSlider import HSlider
 from py4godot.classes.Button.Button import Button
+from py4godot.classes.OptionButton.OptionButton import OptionButton
 from py4godot.classes.TextureRect.TextureRect import TextureRect
 from py4godot.classes.Image.Image import Image as GDImage
 from py4godot.classes.ImageTexture.ImageTexture import ImageTexture
@@ -35,7 +36,17 @@ class python_helper(Node):
 		self.sampling_steps_slider = HSlider.cast(self.get_node(NodePath.new2("%SamplingStepsSlider")))
 		self.cfg_scale_slider = HSlider.cast(self.get_node(NodePath.new2("%CFGScaleSlider")))
 		self.seed_input = LineEdit.cast(self.get_node(NodePath.new2("%SeedInput")))
+		
 		self.palettize_checkbox = Button.cast(self.get_node(NodePath.new2("%PalettizeCheckBox")))
+		self.downscale_checkbox = Button.cast(self.get_node(NodePath.new2("%DownscaleCheckBox")))
+		self.original_checkbox = Button.cast(self.get_node(NodePath.new2("%OriginalCheckBox")))
+		self.upscale_checkbox = Button.cast(self.get_node(NodePath.new2("%UpscaleCheckBox")))
+		self.kcentroid_checkbox = Button.cast(self.get_node(NodePath.new2("%KCentroidCheckBox")))
+		self.colors_count_slider = HSlider.cast(self.get_node(NodePath.new2("%ColorsCountSlider")))
+		self.downscale_factor_slider = HSlider.cast(self.get_node(NodePath.new2("%DownscaleFactorSlider")))
+		self.matrix_size_option = OptionButton.cast(self.get_node(NodePath.new2("%MatrixSizeOption")))
+		self.dithering_strength_slider = HSlider.cast(self.get_node(NodePath.new2("%DitheringStrengthSlider")))
+		
 		self.generated_image = TextureRect.cast(self.get_node(NodePath.new2("%GeneratedImage")))
 		self.generated_image_full = TextureRect.cast(self.get_node(NodePath.new2("%GeneratedImageFull")))
 		
@@ -43,7 +54,7 @@ class python_helper(Node):
 		self.generate_button.pressed.connect(self.generate_button_pressed)
 	
 	# Saves a PIL image to the outputs folder
-	def save_image(self, image):
+	def save_image(self, image, postfix=""):
 		os_instance = OS.get_instance()
 		outputs_folder_path = os_instance.get_user_data_dir() + "/outputs"
 		
@@ -51,7 +62,7 @@ class python_helper(Node):
 			DirAccess.make_dir_absolute(outputs_folder_path)
 		
 		time_instance = Time.get_instance()
-		file_name = time_instance.get_datetime_string_from_system(True, True).replace(":", "_") + ".png"
+		file_name = time_instance.get_datetime_string_from_system(True, True).replace(":", "_") + postfix + ".png"
 		file_path = outputs_folder_path + "/" + file_name
 		image.save(file_path)
 		
@@ -80,19 +91,21 @@ class python_helper(Node):
 			guidance_scale=self.cfg_scale_slider.value,
 			generator=generator)
 		
+		show_original = False
 		if self.palettize_checkbox.button_pressed:
-			downscale = True
-			original = False
-			upscale = True
-			kcentroid = True
-			scale = 8
+			downscale = self.downscale_checkbox.button_pressed
+			show_original = self.original_checkbox.button_pressed
+			upscale = self.upscale_checkbox.button_pressed
+			kcentroid = self.kcentroid_checkbox.button_pressed
+			scale = int(self.downscale_factor_slider.value)
+			# TODO: palette options
 			paletteDropdown = "None"
 			paletteURL = ""
 			palette = None
-			clusters = 24
-			dither = 0
-			ditherStrength = 0
-			processed = run_palettize(processed, downscale, original, upscale, kcentroid, scale, paletteDropdown, paletteURL, palette, clusters, dither, ditherStrength)
+			clusters = int(self.colors_count_slider.value)
+			dither = self.matrix_size_option.selected
+			ditherStrength = int(self.dithering_strength_slider.value)
+			processed = run_palettize(processed, downscale, show_original, upscale, kcentroid, scale, paletteDropdown, paletteURL, palette, clusters, dither, ditherStrength)
 		
 		image = processed.images[0]
 		
@@ -101,10 +114,20 @@ class python_helper(Node):
 		
 		# Display the image
 		#self.show_debug_image()
-		loaded_image = GDImage.load_from_file(image_path)
-		texture = ImageTexture.create_from_image(loaded_image)
-		self.generated_image.texture = texture
-		self.generated_image_full.texture = texture
+		if show_original and len(processed.images) == 2:
+			# Save the original image
+			original_image = processed.images[1]
+			image_path = self.save_image(original_image, " original")
+			# Display the original image
+			loaded_image = GDImage.load_from_file(image_path)
+			texture = ImageTexture.create_from_image(loaded_image)
+			self.generated_image.texture = texture
+			self.generated_image_full.texture = texture
+		else:
+			loaded_image = GDImage.load_from_file(image_path)
+			texture = ImageTexture.create_from_image(loaded_image)
+			self.generated_image.texture = texture
+			self.generated_image_full.texture = texture
 
 	def generate_button_pressed(self):
 		if not os.path.isfile(self.model_path_line.text):

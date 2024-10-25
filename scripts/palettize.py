@@ -164,7 +164,7 @@ def run_palettize(processed, downscale, original, upscale, kcentroid, scale, pal
 		if downscale:
 			img = cv2.resize(tempImg, (int(img.shape[1]*scale), int(img.shape[0]*scale)), interpolation = cv2.INTER_NEAREST)
 
-		if not upscale:
+		if upscale:
 			tempImg = img
 
 		#processed.images[i] = Image.fromarray(img)

@@ -9,6 +9,11 @@ extends Control
 @onready var sampling_steps_label: Label = %SamplingStepsLabel
 @onready var cfg_scale_label: Label = %CFGScaleLabel
 
+@onready var palettize_parameters_container: PanelContainer = %PalettizeParametersContainer
+@onready var colors_count_label: Label = %ColorsCountLabel
+@onready var downscale_factor_label: Label = %DownscaleFactorLabel
+@onready var dithering_strength_label: Label = %DitheringStrengthLabel
+
 func _ready():
 	full_view_container.hide()
 
@@ -42,3 +47,15 @@ func _on_open_outputs_button_pressed() -> void:
 		DirAccess.make_dir_absolute(outputs_folder_path)
 	
 	OS.shell_open(ProjectSettings.globalize_path(outputs_folder_path))
+
+func _on_palettize_menu_button_pressed() -> void:
+	palettize_parameters_container.visible = !palettize_parameters_container.visible
+
+func _on_colors_count_slider_value_changed(value: float) -> void:
+	colors_count_label.text = str(value)
+
+func _on_downscale_factor_slider_value_changed(value: float) -> void:
+	downscale_factor_label.text = str(value)
+
+func _on_dithering_strength_slider_value_changed(value: float) -> void:
+	dithering_strength_label.text = str(value)

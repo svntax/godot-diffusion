@@ -13,28 +13,40 @@ grow_vertical = 2
 script = ExtResource("1_tm2m7")
 metadata/_edit_lock_ = true
 
-[node name="MainContainer" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
 
-[node name="TopMarginContainer" type="MarginContainer" parent="MainContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+
+[node name="MainContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopMarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/MainContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 
-[node name="Title" type="Label" parent="MainContainer/TopMarginContainer"]
+[node name="Title" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/TopMarginContainer"]
 layout_mode = 2
 text = "Godot Diffusion"
 
-[node name="BodyContainer" type="HBoxContainer" parent="MainContainer"]
+[node name="BodyContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LeftMarginContainer" type="MarginContainer" parent="MainContainer/BodyContainer"]
+[node name="LeftMarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -43,58 +55,58 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="LeftContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer"]
+[node name="LeftContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer"]
 layout_mode = 2
 
-[node name="PromptContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer"]
+[node name="PromptContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer"]
 layout_mode = 2
 
-[node name="PositivePromptLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/PromptContainer"]
+[node name="PositivePromptLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/PromptContainer"]
 layout_mode = 2
 text = "Prompt"
 
-[node name="PositivePrompt" type="TextEdit" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/PromptContainer"]
+[node name="PositivePrompt" type="TextEdit" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/PromptContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 96)
 layout_mode = 2
 text = "A grassy field"
 wrap_mode = 1
 
-[node name="NegativePromptContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer"]
+[node name="NegativePromptContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer"]
 layout_mode = 2
 
-[node name="NegativePromptLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/NegativePromptContainer"]
+[node name="NegativePromptLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/NegativePromptContainer"]
 layout_mode = 2
 text = "Negative prompt"
 
-[node name="NegativePrompt" type="TextEdit" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/NegativePromptContainer"]
+[node name="NegativePrompt" type="TextEdit" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/NegativePromptContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 96)
 layout_mode = 2
 wrap_mode = 1
 
-[node name="ParametersContainer" type="GridContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer"]
+[node name="ParametersContainer" type="GridContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer"]
 layout_mode = 2
 
-[node name="WidthContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
+[node name="WidthContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Labels" type="HBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer"]
+[node name="Labels" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer"]
 layout_mode = 2
 
-[node name="SizeLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer/Labels"]
+[node name="SizeLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer/Labels"]
 layout_mode = 2
 text = "Width"
 
-[node name="WidthValueLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer/Labels"]
+[node name="WidthValueLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer/Labels"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "512"
 horizontal_alignment = 2
 
-[node name="WidthSlider" type="HSlider" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer"]
+[node name="WidthSlider" type="HSlider" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -104,25 +116,25 @@ max_value = 2048.0
 step = 64.0
 value = 512.0
 
-[node name="HeightContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
+[node name="HeightContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Labels" type="HBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer"]
+[node name="Labels" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer"]
 layout_mode = 2
 
-[node name="SizeLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer/Labels"]
+[node name="SizeLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer/Labels"]
 layout_mode = 2
 text = "Height"
 
-[node name="HeightValueLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer/Labels"]
+[node name="HeightValueLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer/Labels"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "512"
 horizontal_alignment = 2
 
-[node name="HeightSlider" type="HSlider" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer"]
+[node name="HeightSlider" type="HSlider" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -132,30 +144,30 @@ max_value = 2048.0
 step = 64.0
 value = 512.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="SamplingStepsContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer"]
+[node name="SamplingStepsContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Labels" type="HBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer"]
+[node name="Labels" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer/Labels"]
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer/Labels"]
 layout_mode = 2
 text = "Steps
 "
 
-[node name="SamplingStepsLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer/Labels"]
+[node name="SamplingStepsLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer/Labels"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "20"
 horizontal_alignment = 2
 
-[node name="SamplingStepsSlider" type="HSlider" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer"]
+[node name="SamplingStepsSlider" type="HSlider" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -164,26 +176,26 @@ min_value = 1.0
 max_value = 150.0
 value = 20.0
 
-[node name="CFGScaleContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer"]
+[node name="CFGScaleContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Labels" type="HBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer"]
+[node name="Labels" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer/Labels"]
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer/Labels"]
 layout_mode = 2
 text = "CFG Scale
 "
 
-[node name="CFGScaleLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer/Labels"]
+[node name="CFGScaleLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer/Labels"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "7"
 horizontal_alignment = 2
 
-[node name="CFGScaleSlider" type="HSlider" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer"]
+[node name="CFGScaleSlider" type="HSlider" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -193,27 +205,192 @@ max_value = 30.0
 step = 0.5
 value = 7.0
 
-[node name="SeedContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
+[node name="SeedContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
 layout_mode = 2
 
-[node name="SeedLabel" type="Label" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/SeedContainer"]
+[node name="SeedLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/SeedContainer"]
 layout_mode = 2
 text = "Seed"
 
-[node name="SeedInput" type="LineEdit" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/SeedContainer"]
+[node name="SeedInput" type="LineEdit" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/SeedContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0"
 max_length = 32
 
-[node name="PalettizeCheckBox" type="CheckBox" parent="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
+[node name="PalettizeContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PalettizeMenuButton" type="Button" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PalettizeCheckBox" type="CheckBox" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeMenuButton"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+offset_right = 95.0
+offset_bottom = 32.0
 size_flags_horizontal = 0
 text = "Palettize"
 
-[node name="RightMarginContainer" type="MarginContainer" parent="MainContainer/BodyContainer"]
+[node name="PalettizeParametersContainer" type="PanelContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ColorsCountContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Labels" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/ColorsCountContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/ColorsCountContainer/Labels"]
+layout_mode = 2
+text = "Colors in palette"
+
+[node name="ColorsCountLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/ColorsCountContainer/Labels"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "24"
+horizontal_alignment = 2
+
+[node name="ColorsCountSlider" type="HSlider" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/ColorsCountContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 2.0
+max_value = 128.0
+value = 24.0
+
+[node name="TogglesContainer" type="GridContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="DownscaleCheckBox" type="CheckBox" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/TogglesContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Downscale"
+
+[node name="OriginalCheckBox" type="CheckBox" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/TogglesContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Show original"
+
+[node name="UpscaleCheckBox" type="CheckBox" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/TogglesContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Upscale"
+
+[node name="KCentroidCheckBox" type="CheckBox" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/TogglesContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Use K-Centroid for downscaling"
+
+[node name="DownscaleFactorContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Labels" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/DownscaleFactorContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/DownscaleFactorContainer/Labels"]
+layout_mode = 2
+text = "Downscale factor"
+
+[node name="DownscaleFactorLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/DownscaleFactorContainer/Labels"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "8"
+horizontal_alignment = 2
+
+[node name="DownscaleFactorSlider" type="HSlider" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/DownscaleFactorContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 2.0
+max_value = 32.0
+value = 8.0
+
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dithering Settings"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Matrix Size"
+
+[node name="MatrixSizeOption" type="OptionButton" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "None"
+popup/item_1/text = "Bayer 2x2"
+popup/item_1/id = 1
+popup/item_2/text = "Bayer 4x4"
+popup/item_2/id = 2
+popup/item_3/text = "Bayer 8x8"
+popup/item_3/id = 3
+
+[node name="DitheringStrengthContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Labels" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer/DitheringStrengthContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer/DitheringStrengthContainer/Labels"]
+layout_mode = 2
+text = "Dithering strength"
+
+[node name="DitheringStrengthLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer/DitheringStrengthContainer/Labels"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 2
+
+[node name="DitheringStrengthSlider" type="HSlider" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer/DitheringStrengthContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 10.0
+
+[node name="RightMarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -221,45 +398,47 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="RightContainer" type="VBoxContainer" parent="MainContainer/BodyContainer/RightMarginContainer"]
+[node name="RightContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/separation = 8
 
-[node name="ModelPathLabel" type="Label" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
+[node name="ModelPathLabel" type="Label" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
 layout_mode = 2
 text = "Model path"
 
-[node name="ModelPath" type="LineEdit" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
+[node name="ModelPath" type="LineEdit" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="LoadModelButton" type="Button" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer/HBoxContainer"]
+[node name="LoadModelButton" type="Button" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Load Model"
 
-[node name="GenerateButton" type="Button" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer/HBoxContainer"]
+[node name="GenerateButton" type="Button" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Generate"
 
-[node name="OutputsContainer" type="PanelContainer" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
+[node name="OutputsContainer" type="PanelContainer" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
+custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GeneratedImage" type="TextureRect" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer/OutputsContainer"]
+[node name="GeneratedImage" type="TextureRect" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer/OutputsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ViewImageButton" type="Button" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer/OutputsContainer/GeneratedImage"]
+[node name="ViewImageButton" type="Button" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer/OutputsContainer/GeneratedImage"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -269,7 +448,7 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="OpenOutputsButton" type="Button" parent="MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
+[node name="OpenOutputsButton" type="Button" parent="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -317,12 +496,16 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 stretch_mode = 3
 
-[connection signal="value_changed" from="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer/WidthSlider" to="." method="_on_width_slider_value_changed"]
-[connection signal="value_changed" from="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer/HeightSlider" to="." method="_on_height_slider_value_changed"]
-[connection signal="value_changed" from="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer/SamplingStepsSlider" to="." method="_on_sampling_steps_slider_value_changed"]
-[connection signal="value_changed" from="MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer/CFGScaleSlider" to="." method="_on_cfg_scale_slider_value_changed"]
-[connection signal="pressed" from="MainContainer/BodyContainer/RightMarginContainer/RightContainer/HBoxContainer/LoadModelButton" to="." method="_on_load_model_button_pressed"]
-[connection signal="pressed" from="MainContainer/BodyContainer/RightMarginContainer/RightContainer/OutputsContainer/GeneratedImage/ViewImageButton" to="." method="_on_view_image_button_pressed"]
-[connection signal="pressed" from="MainContainer/BodyContainer/RightMarginContainer/RightContainer/OpenOutputsButton" to="." method="_on_open_outputs_button_pressed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/WidthContainer/WidthSlider" to="." method="_on_width_slider_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HeightContainer/HeightSlider" to="." method="_on_height_slider_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/SamplingStepsContainer/SamplingStepsSlider" to="." method="_on_sampling_steps_slider_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/HBoxContainer/CFGScaleContainer/CFGScaleSlider" to="." method="_on_cfg_scale_slider_value_changed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeMenuButton" to="." method="_on_palettize_menu_button_pressed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/ColorsCountContainer/ColorsCountSlider" to="." method="_on_colors_count_slider_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/DownscaleFactorContainer/DownscaleFactorSlider" to="." method="_on_downscale_factor_slider_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/LeftMarginContainer/LeftContainer/ParametersContainer/PalettizeContainer/PalettizeParametersContainer/MarginContainer/VBoxContainer/HBoxContainer/DitheringStrengthContainer/DitheringStrengthSlider" to="." method="_on_dithering_strength_slider_value_changed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer/HBoxContainer/LoadModelButton" to="." method="_on_load_model_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer/OutputsContainer/GeneratedImage/ViewImageButton" to="." method="_on_view_image_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/MainContainer/BodyContainer/RightMarginContainer/RightContainer/OpenOutputsButton" to="." method="_on_open_outputs_button_pressed"]
 [connection signal="file_selected" from="Node/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="FullViewContainer/PanelContainer/CloseFullViewButton" to="." method="_on_close_full_view_button_pressed"]
