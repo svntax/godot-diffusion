@@ -34,6 +34,8 @@ python -m pip install opencv-python
 ```
 
 ## Running the project
+![godot_diffusion_screenshot](https://github.com/user-attachments/assets/fe651c5d-b310-419a-8aae-48bfd8658353)
+
 To generate images, run the main scene, and then select a `.safetensors` model to load and press "Generate".
 
 ### Palettize
